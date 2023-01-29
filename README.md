@@ -1,5 +1,31 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Tech Stack
+
+This project is powered by:
+[Next.js](https://nextjs.org/)
+[Openai](https://beta.openai.com/examples/default-movie-to-emoji)
+[promptable.ai](https://promptable.ai/)
+[promptable.js](https://github.com/promptable/Promptable.js)
+[mui](https://mui.com/material-ui/)
+
+## Live Demo
+
+[Demo](https://chatgpt-starter.vercel.app/)
+
+## Tutorial
+
+[Bilibili](https://www.bilibili.com/video/BV1xY411Q7vi/)
+[Youtube](https://www.youtube.com/watch?v=Vw3WAnDP5HI)
+
+## Enviromoent
+
+Create a new .env.local and paste a OPENAI_API_KEY there
+
+```
+OPENAI_API_KEY=sk-......
+```
+
 ## Getting Started
 
 First, run the development server:
