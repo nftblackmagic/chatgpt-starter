@@ -13,6 +13,7 @@ export const ChatContainer = () => {
       <a
         href="https://github.com/nftblackmagic/chatgpt-starter"
         target="_blank"
+        rel="noreferrer"
       >
         <h1>MOVIE to emoji</h1>
       </a>
