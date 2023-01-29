@@ -1,25 +1,26 @@
 import { useChatGpt } from "@/hook/useChatGpt";
+import { addMessage } from "@/utils/chatHistory";
 import { Button, TextField } from "@mui/material";
 import React, { useEffect } from "react";
+import { ChatHistoryFrame } from "./ChatHistoryFrame";
 
 const promptId = "cld9piv9j049zi7ehio0g5979";
 
 export const ChatContainer = () => {
   const [pendingMessage, setPendingMessage] = React.useState("");
   const [message, setMessage] = React.useState("");
-  const [chatHistory, setChatHistory] = React.useState("");
-  const { data, isLoading, history } = useChatGpt(
+  const [chatHistory, setChatHistory] = React.useState([]);
+  const { data, isLoading, history, isSuccess, isError } = useChatGpt(
     message,
     promptId,
     chatHistory
   );
 
   useEffect(() => {
-    if (history) {
-      setChatHistory(history);
-      console.log("Chat history", history);
+    if (isSuccess || isError) {
+      setMessage("");
     }
-  }, [history]);
+  }, [isSuccess, isError]);
 
   return (
     <div id="chat-container">
@@ -30,6 +31,9 @@ export const ChatContainer = () => {
       >
         <h1>MOVIE to emoji</h1>
       </a>
+      {chatHistory.length > 0 && (
+        <ChatHistoryFrame chatHistory={chatHistory} isLoading={isLoading} />
+      )}
       <TextField
         type="text"
         onChange={(e) => {
@@ -40,12 +44,11 @@ export const ChatContainer = () => {
         variant="outlined"
         onClick={() => {
           setMessage(pendingMessage);
+          setChatHistory(addMessage(history || [], pendingMessage, "user"));
         }}
       >
         Send
       </Button>
-      <h2>{message}</h2>
-      {isLoading ? <h2>Loading...</h2> : <h2>{data}</h2>}
     </div>
   );
 };

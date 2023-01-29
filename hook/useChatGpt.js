@@ -1,3 +1,4 @@
+import { addMessage, getHistoryString } from "@/utils/chatHistory";
 import React, { useEffect } from "react";
 
 export const useChatGpt = (message, promptId, chatHistory) => {
@@ -8,6 +9,7 @@ export const useChatGpt = (message, promptId, chatHistory) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
   const [history, setHistory] = React.useState(chatHistory);
+  const [isSuccess, setIsSuccess] = React.useState(false);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -20,21 +22,14 @@ export const useChatGpt = (message, promptId, chatHistory) => {
         body: JSON.stringify({
           message,
           promptId,
-          chatHistory,
+          chatHistory: getHistoryString(chatHistory),
         }),
       }).then((res) => res.json());
       if (response.reply) {
         console.log("Hook api call response", response.reply);
         setData(response.reply);
-        setHistory(
-          history +
-            "User: " +
-            message +
-            "\n" +
-            "Agent: " +
-            response.reply +
-            "\n"
-        );
+        setIsSuccess(true);
+        setHistory(addMessage(chatHistory, response.reply, "agent"));
       } else {
         setIsError(true);
       }
@@ -46,6 +41,7 @@ export const useChatGpt = (message, promptId, chatHistory) => {
 
   useEffect(() => {
     setIsError(false);
+    setIsSuccess(false);
     if (message) {
       fetchData();
     }
@@ -56,5 +52,6 @@ export const useChatGpt = (message, promptId, chatHistory) => {
     isLoading,
     isError,
     history,
+    isSuccess,
   };
 };
