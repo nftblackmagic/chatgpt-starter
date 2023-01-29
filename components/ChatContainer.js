@@ -10,7 +10,12 @@ export const ChatContainer = () => {
   const { data, isLoading, isError } = useChatGpt(message, promptId);
   return (
     <div id="chat-container">
-      <h1>Chat Container</h1>
+      <a
+        href="https://github.com/nftblackmagic/chatgpt-starter"
+        target="_blank"
+      >
+        <h1>MOVIE to emoji</h1>
+      </a>
       <TextField
         type="text"
         onChange={(e) => {
