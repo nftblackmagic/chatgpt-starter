@@ -1,13 +1,26 @@
 import { useChatGpt } from "@/hook/useChatGpt";
 import { Button, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 const promptId = "cld9piv9j049zi7ehio0g5979";
 
 export const ChatContainer = () => {
   const [pendingMessage, setPendingMessage] = React.useState("");
   const [message, setMessage] = React.useState("");
-  const { data, isLoading, isError } = useChatGpt(message, promptId);
+  const [chatHistory, setChatHistory] = React.useState("");
+  const { data, isLoading, history } = useChatGpt(
+    message,
+    promptId,
+    chatHistory
+  );
+
+  useEffect(() => {
+    if (history) {
+      setChatHistory(history);
+      console.log("Chat history", history);
+    }
+  }, [history]);
+
   return (
     <div id="chat-container">
       <a
