@@ -124,3 +124,12 @@ a {
   height: 60vh;
   overflow: scroll;
 }
+
+#chat-input {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

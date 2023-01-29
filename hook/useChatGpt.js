@@ -47,6 +47,18 @@ export const useChatGpt = (message, promptId, chatHistory) => {
     }
   }, [message]);
 
+  useEffect(() => {
+    setHistory(chatHistory);
+  }, [chatHistory]);
+
+  useEffect(() => {
+    if (promptId) {
+      setIsError(false);
+      setIsSuccess(false);
+      setHistory([]);
+    }
+  }, [promptId]);
+
   return {
     data,
     isLoading,
