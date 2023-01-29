@@ -1,0 +1,15 @@
+.user {
+  background: lightblue;
+  border: 1px solid gray;
+  border-radius: 100px;
+  padding: 5px 10px;
+  align-self: flex-end;
+}
+
+.agent {
+  background: ghostwhite;
+  border: 1px solid gray;
+  border-radius: 100px;
+  padding: 5px 10px;
+  align-self: flex-start;
+}
